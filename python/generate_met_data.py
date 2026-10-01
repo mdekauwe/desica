@@ -39,11 +39,11 @@ def generate_met_data(PPFDmax=2000, RH=30, Tmax=30, Tmin=10, day_length=12,
         ta[ival-1] = td[i]
 
     nnight = len(r) - len(td)
-    tdec = ta[max(ii)-1] + (Tmin - ta[max(ii)-1]) * \
+    tdec = ta[ii.max()-1] + (Tmin - ta[ii.max()-1]) * \
             np.arange(1, nnight+1) / nnight
-    after = np.arange((max(ii)), len(r))
+    after = np.arange((ii.max()), len(r))
     ta[after] = tdec[np.arange(len(after))]
-    before = np.arange(min(ii)-1)
+    before = np.arange(ii.min()-1)
     ta[before] = tdec[np.arange(len(after), len(tdec))]
 
     vpd = rh_to_vpd(RH, ta)

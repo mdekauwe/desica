@@ -6,7 +6,7 @@ Canopy wrapper to calculate photosynthesis and stomatal conductance.
 That's all folks.
 """
 __author__ = "Martin De Kauwe"
-__version__ = "1.0 (19.02.2018)"
+__version__ = "1.0 (01.10.2018)"
 __email__ = "mdekauwe@gmail.com"
 
 import sys
@@ -75,13 +75,13 @@ class Canopy(object):
         Cs : float
             leaf surface CO2 concentration [umol mol-1]
         tair : float
-            air temp [deg K]
+            air temp [deg C]
         par : float
             photosynthetically active radiation [umol m-2 s-1].
         vpd : float
             Vapour pressure deficit [kPa]
         mult : float
-            multiplier to define gs / A
+            multiplier to define gs / A, i.e. g1 * fw / Ca [mol umol-1]
 
         Returns
         -------
@@ -636,7 +636,7 @@ class FarquharC3(object):
             if a == 0.0 and b > 0.0:
                 root = -c / b
             elif a == 0.0 and b == 0.0:
-                root == 0.0
+                root = 0.0
                 if c != 0.0:
                     raise ValueError('Cant solve quadratic')
             else:

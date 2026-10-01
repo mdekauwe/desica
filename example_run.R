@@ -21,7 +21,7 @@ run1 <- desica(met,
                gmin=10,   # mmol m-2 s-1
                Cl=10000,  # Leaf capacitance (mmol MPa-1) (total plant)
                Cs=120000, # Stem capacitance (mmol MPa-1)
-               runtwice=TRUE,  # each timestep run twice, for numerical stability (default, can omit)
+               # nsub: sub-steps per timestep, for numerical stability (default: <= 10 min each, can omit)
                stopsimdead=TRUE) # stop simulation when PLC>88 (default, can omit)
 
 # Standard plot
@@ -34,14 +34,15 @@ plot_desica(run1)
 # - psist (stem water potential)
 # - psis (soil water potential)
 # - sw (soil volumetric water content)
-# - ks (soil conductance, mmol m-2 s-1 MPa-1) !!NOTE: ks is too sensitive to psis in the current setup!!
+# - ks (soil-to-root conductance, mmol m-2 s-1 MPa-1)
 # - kp (plant hydr. conductance, mmol m-2 s-1 MPa-1)
-# - Jsl (flux from stem to leaf, mmol s-1)
-# - Jrs (root water uptake, mmol s-1)
+# - Jsl (flux from stem to leaf, mmol s-1, mean over the timestep)
+# - Jrs (root water uptake, mmol s-1, mean over the timestep)
 # - krst (conductance from soil to stem water store)
 # - kstl (conductance from stem to leaf)
 # - plc (percent loss conductivity)
 # - Eplant (mmol s-1)
+# - runoff (water lost once the soil bucket is saturated, kg m-2 (mm) per timestep)
 
 # simple summary:
 # The transition from Phase1 to Phase2 is (arbitrarily) when

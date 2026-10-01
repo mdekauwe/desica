@@ -43,7 +43,7 @@ gmin = 10.     # minimum stomatal conductance, mmol m-2 s-1
 Cl = 10000.    # leaf capacitance, mmol MPa-1 (total plant)
 Cs = 120000.   # stem capacitance, mmol MPa-1
 g1 = 4.0       # sensitivity of stomatal conductance to the assimilation
-               # rate, kPa
+               # rate (-)
 
 F = Canopy(g1=g1)
 D = Desica(psi_stem0=psi_stem0, AL=AL, p50=p50, psi_f=psi_f, gmin=gmin,
@@ -54,10 +54,10 @@ out = D.run_simulation(met)
 steady = out.tail(1)
 
 
-x = (steady.psi_soil - steady.Eleaf / steady.kplant).values
-y = steady.psi_leaf.values
+x = (steady.psi_soil - steady.Eleaf / steady.kplant).values[0]
+y = steady.psi_leaf.values[0]
 
 if isclose(x, y, rel_tol=0.01):
-    print("Match", x[0], y[0])
+    print("Match", x, y)
 else:
-    print(x[0], y[0])
+    print(x, y)
